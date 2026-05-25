@@ -11,6 +11,7 @@ public class User {
     String username;
     String password;
     String phoneNumber;
+    boolean loggedIn=false;
 
 
     User(String name , String password,String phoneNumber){
@@ -38,6 +39,9 @@ public class User {
             if (password.equals(registeredUser.password) && userName.equals(registeredUser.username)){
 
                 System.out.println("log in  is successfully");
+                MessageOption();
+
+
 
             }
             else {
@@ -103,7 +107,7 @@ public class User {
         boolean haslessCharacters=username.length()>=8;
         boolean isValid = hasUnderscore && haslessCharacters;
         if (!hasUnderscore){
-            System.out.println("Username is invalid ooes not contain an Underscore (_)");
+            System.out.println("Username is invalid does not contain an Underscore (_)");
         }
         if (!haslessCharacters){
             System.out.println("Username must have at least 5 characters ");
@@ -116,11 +120,53 @@ public class User {
         if (cellphone.matches("^0\\d{9}$")) {
             String trimmedPhone = "+27"+cellphone.substring(1);
             System.out.println("Valid number");
-            System.out.println("Phone number is " + trimmedPhone);
             isNumberValid=true;
         } else {
             System.out.println("Invalid phone number");
         }
         return isNumberValid;
     }
+    static void MessageOption(){
+        System.out.println("Welcome to quick Message");
+        System.out.println("1 : Send Messages");
+        System.out.println("2 : Show recently sent (Coming soon)");
+        System.out.println("3 : Quit");
+        int option=0;
+        Scanner scanner=new Scanner(System.in);
+        while (option!=3){
+            option= scanner.nextInt();
+            switch (option){
+                case 1 ->{
+
+                    System.out.println("Sending messages");
+                    Scanner msgScanner = new Scanner(System.in);
+                    System.out.print("Enter recipient: ");
+                    String recipient = msgScanner.nextLine().trim();
+                    Messages.checkRecipientCell(recipient);
+                    System.out.print("Enter your message: ");
+                    String msg = msgScanner.nextLine().trim();
+
+                    Messages message = new Messages( recipient, msg);
+                    message.MessageOption();
+
+                }
+                case 2 ->{
+                    System.out.println("Coming soon ");
+                }
+                case 3 ->{
+                    System.out.println("Quit");
+                    return;
+                }
+                default -> System.out.println("Try again ");
+            }
+
+
+        }
+
+
+
+
+
+    }
+
 }
