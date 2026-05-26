@@ -142,10 +142,12 @@ public class User {
                     Scanner msgScanner = new Scanner(System.in);
                     System.out.print("Enter recipient: ");
                     String recipient = msgScanner.nextLine().trim();
-                    Messages.checkRecipientCell(recipient);
+                    if (Messages.checkRecipientCell(recipient).equals("Invalid")) {
+                        System.out.println("Cannot send message. Returning to menu...");
+                        break;
+                    }
                     System.out.print("Enter your message: ");
                     String msg = msgScanner.nextLine().trim();
-
                     Messages message = new Messages( recipient, msg);
                     message.MessageOption();
 

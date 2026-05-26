@@ -19,7 +19,6 @@ public class Messages {
 
         this.messageId=generateId();
         checkMessageId(this.messageId);
-        this.numOfMessages=0;
         this.recipient=recipient;
         this.message=message;
         this.messageHash=createMessageHash(this.messageId, this.numOfMessages, this.message);
@@ -81,7 +80,7 @@ public class Messages {
 
         while (!choice.equalsIgnoreCase("quit")) {
             System.out.println("\n Quick Message");
-            System.out.println("Messages sent: " + numOfMessages);
+            System.out.println("Messages sent: " + this.numOfMessagesSent);
             System.out.println("1 : Send Message");
             System.out.println("2 : Disregard Message");
             System.out.println("3 : Store Message");
@@ -140,16 +139,14 @@ public class Messages {
             }
         }
     }
-    static String checkRecipientCell(String cellphone){
-        boolean isNumberValid=false;
-        if (cellphone.matches("^0\\d{9}$")) {
-            String trimmedPhone = "+27"+cellphone.substring(1);
+    static String checkRecipientCell(String cellphone) {
+        if (cellphone.matches("^0\\d{9}$") || cellphone.matches("^\\+27\\d{9}$")) {
             System.out.println("Valid number");
-            isNumberValid=true;
+            return "Number is Valid";
         } else {
             System.out.println("Invalid phone number");
+            return "Invalid";
         }
-        return "Number is Valid";
     }
     int returnTotalMessages() {
         return this.numOfMessagesSent;
